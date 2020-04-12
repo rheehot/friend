@@ -41,6 +41,7 @@ router.post('/', async (req,res)=>{
     userModel.email = email;
     userModel.name = name;
     userModel.password = key.toString('base64');
+    userModel.salt = salt;
     userModel.save()
     .then((newUser)=>{
         res.status(200).json({
