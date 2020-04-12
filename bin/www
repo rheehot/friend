@@ -8,7 +8,7 @@ var app = require('../app');
 var debug = require('debug')('friend:server');
 var http = require('http');
 var mongoose = require('mongoose');
-const mongoosePW = require("../config/mongoDB.json");
+const mongoosePW = require("../config/userinfo.json");
 /**
  * Get port from environment and store in Express.
  */
@@ -19,7 +19,10 @@ const mongoosePW = require("../config/mongoDB.json");
    console.log("Connected to mongod server");
  });
 
- mongoose.connect('mongodb://admin:'+mongoosePW.mongoosePW+'@localhost:27017/FRIENDDB?retryWrites=true&w=majority', {useUnifiedTopology:true,useNewUrlParser:true });
+mongoose.connect('mongodb://localhost/FRIENDDB',{
+  useNewUrlParser:true,
+  useUnifiedTopology:true
+})
 
 var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
