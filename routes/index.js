@@ -7,6 +7,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.use('/auth', require('./auth'));
+router.use('/group', require('/group'))
 
 
 module.exports = router;
