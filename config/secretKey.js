@@ -1,3 +1,3 @@
 module.exports ={
-    secretKey:"Young"
+    secretOrPrivateKey:"Young"
 };

@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 var encryption = require('../../../module/encryption');
 const users = require('../../../model/user');
+const jwt = require('../../../module/jwt');
+
 
 router.post('/', async (req,res)=>{
     const {email, password} = req.body;
@@ -34,8 +36,11 @@ router.post('/', async (req,res)=>{
         const userData= await users.findOne({email:email});
         const dbPw = (encryption.makeCrypto(password, userData.salt)).toString('base64');
         if(dbPw == userData.password){
+            const result = jwt.sign(userData);
+            const data = await users.findOneAndUpdate({email:email},{$set:{refreshToken:result.refreshToken}}, {new:true})
             res.status(200).json({
-                message:"로그인 성공"
+                message:"로그인 성공",
+                data:result
             })
             return;
         }

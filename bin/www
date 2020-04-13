@@ -21,7 +21,8 @@ const mongoosePW = require("../config/userinfo.json");
 
 mongoose.connect('mongodb://localhost/FRIENDDB',{
   useNewUrlParser:true,
-  useUnifiedTopology:true
+  useUnifiedTopology:true,
+  useFindAndModify:true
 })
 
 var port = normalizePort(process.env.PORT || '3000');
